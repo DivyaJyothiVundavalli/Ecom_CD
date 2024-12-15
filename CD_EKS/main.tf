@@ -52,20 +52,30 @@ module "eks" {
   }
 }
 
-# Output cluster_name
-output "cluster_name" {
- value = module.eks.cluster_name
-}
-
 data "aws_eks_cluster" "cluster" {
-  depends_on = [module.eks]
-  name       = module.eks.cluster_name
+  name = module.eks.cluster_id
 }
 
 data "aws_eks_cluster_auth" "cluster" {
-  depends_on = [module.eks]
-  name       = module.eks.cluster_name
+  name = module.eks.cluster_id
 }
+
+
+
+# Output cluster_name
+# output "cluster_name" {
+# value = module.eks.cluster_name
+# }
+
+# data "aws_eks_cluster" "cluster" {
+#  depends_on = [module.eks]
+#  name       = module.eks.cluster_name
+# }
+
+# data "aws_eks_cluster_auth" "cluster" {
+# depends_on = [module.eks]
+#  name       = module.eks.cluster_name
+# }
 
 
 
